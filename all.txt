@@ -1,0 +1,1636 @@
+EXPERIMENT – 1 
+“UML Modelling of ATM System” 
+You can write this as-is. 
+UML MODELLING OF ATM SYSTEM 
+AIM 
+To study the system specifications of an ATM system and develop UML diagrams such 
+as Use Case, Class, Sequence, and Collaboration diagrams. 
+SYSTEM SPECIFICATION 
+The ATM (Automated Teller Machine) system allows bank customers to perform 
+f
+inancial transactions without visiting a bank. 
+Actors: 
+• Customer (Primary Actor) 
+• Bank Server 
+• Maintenance Staff / Admin 
+Functions: 
+• Insert Card 
+• Authenticate User (PIN verification) 
+• Withdraw Cash 
+• Deposit Cash 
+• Check Balance 
+• Change PIN 
+• Print Receipt 
+• End Session 
+Constraints: 
+• Card must be valid 
+• PIN must be correct 
+• Sufficient balance for withdrawal 
+• Session timeout or card ejection after completion 
+UML DIAGRAMS 
+USE CASE DIAGRAM 
+Description: 
+A Use Case Diagram represents the interaction between actors and the system. 
+Elements: 
+• Actor: Customer 
+• Use Cases: 
+o Insert Card 
+o Authenticate User 
+o Withdraw Cash 
+o Deposit Cash 
+o Check Balance 
+o Change PIN 
+o Print Receipt 
+o End Session 
+Explanation: 
+The Customer interacts with the ATM system to perform various banking operations. The 
+system communicates with the bank server for authentication and transaction 
+processing. 
+Steps: 
+1. Right-click Model → Add Diagram → Use Case Diagram 
+2. From Toolbox (right side): 
+o Select Actor → click → rename → Customer 
+3. Select Use Case (oval) → create: 
+o Insert Card 
+o Authenticate User 
+o Withdraw Cash 
+o Check Balance 
+4. Select Association (line) 
+o Connect Customer → all use cases 
+Tip: 
+Keep Customer on left, ovals on right = clean diagram 
+CLASS DIAGRAM 
+Description: 
+A Class Diagram represents the structure of the system by showing classes, attributes, 
+methods, and relationships. 
+Classes and Details: 
+1. ATM 
+• Attributes: atmID, location 
+• Methods: startSession(), authenticate(), endSession() 
+2. Customer 
+• Attributes: name, address 
+• Methods: insertCard(), selectTransaction() 
+3. Card 
+• Attributes: cardNumber, expiryDate 
+• Methods: readCard(), validatePIN() 
+4. Account 
+• Attributes: accountNumber, balance 
+• Methods: debit(), credit(), getBalance() 
+5. Transaction (Abstract) 
+• Attributes: amount, date 
+• Methods: execute() 
+6.withdraw 
+Amount,execute() 
+Relationships: 
+• Customer owns Card and Account 
+• ATM interacts with Account 
+• Transaction is associated with Account 
+Explanation: 
+The Class Diagram shows how different components of the ATM system are organized 
+and interact with each other. 
+Steps: 
+1. Add Diagram → Class Diagram 
+2. Select Class → create: 
+o ATM 
+o Customer 
+o Card 
+o Account 
+3. Add attributes: 
+Double-click class → right-click inside → Add → Attribute 
+Example: 
+• ATM → atmID, location 
+• Account → balance 
+4. Add methods: 
+Right-click → Add → Operation 
+• ATM → startSession() 
+• Account → debit(), credit() 
+5. Add relationships: 
+• Use Association line 
+• Connect: 
+o Customer → Account 
+o Customer → Card 
+o ATM → Account 
+SEQUENCE DIAGRAM 
+Description: 
+A Sequence Diagram shows the interaction between objects in a time sequence. 
+Scenario: Withdraw Cash 
+Steps: 
+1. Customer inserts card 
+2. ATM requests PIN 
+3. Customer enters PIN 
+4. ATM verifies PIN with Bank Server 
+5. Bank Server validates and responds 
+6. Customer selects withdrawal option 
+7. Customer enters amount 
+8. ATM checks balance 
+9. Bank processes transaction 
+10. ATM dispenses cashtr 
+11. Receipt is printed 
+12. Session ends 
+Explanation: 
+The diagram shows the step-by-step interaction between Customer, ATM, and Bank 
+Server during a widr’ 
+thdrawal transaction. 
+Steps: 
+1. Add Diagram → Sequence Diagram 
+2. Select Lifeline → add: 
+o :Customer 
+o :ATM 
+o :Bank 
+3. Add messages (arrow tool): 
+Draw top → down 
+Write: 
+• Customer → ATM : insertCard 
+• ATM → Customer : requestPIN 
+• Customer → ATM : enterPIN 
+• ATM → Bank : verifyPIN 
+• Bank → ATM : success 
+• ATM → Customer : dispenseCash 
+Tip: 
+Always draw vertically (top to bottom) 
+COLLABORATION (COMMUNICATION) DIAGRAM 
+Description: 
+A Collaboration Diagram shows interactions between objects using numbered 
+messages. 
+Objects: 
+• Customer 
+• ATM 
+• Account / Bank 
+Message Flow: 
+1. Customer → ATM : insertCard() 
+2. ATM → Bank : verifyPIN() 
+3. ATM → Account : checkBalance() 
+4. ATM → Account : withdrawAmount() 
+5. ATM → Customer : dispenseCash() 
+Explanation: 
+The diagram focuses on object relationships and message flow rather than time 
+sequence. 
+Steps: 
+1. Add Diagram → Communication Diagram 
+2. Add Objects / Lifelines: 
+o Customer, ATM, Bank 
+3. Connect using Link 
+4. Add messages: 
+Click link → add label: 
+• 1: insertCard 
+• 2: verifyPIN 
+• 3: withdraw 
+Tip: 
+Numbers are MUST → gives marks 
+ACTIVITY DIAGRAM 
+Description: 
+An Activity Diagram represents the workflow of operations. 
+Flow: 
+Start → Insert Card → Enter PIN → Validate PIN 
+→ [Valid?] 
+→ Yes → Select Transaction → Withdraw Cash → Dispense Cash → End 
+→ No → Eject Card → End 
+Explanation: 
+It shows the step-by-step workflow of ATM operations. 
+Steps: 
+1. Add Diagram → Activity Diagram 
+2. Add: 
+o Initial Node (black dot) 
+o Action nodes: 
+▪ Insert Card 
+▪ Enter PIN 
+▪ Withdraw Cash 
+3. Add Decision (diamond): 
+o Condition: Valid PIN? 
+4. Connect using Control Flow arrows 
+5. Add Final Node 
+STATE DIAGRAM 
+Description: 
+A State Diagram represents different states of the ATM system. 
+States: 
+Idle → Card Inserted → PIN Entered → Authenticated 
+→ Transaction Processing → Cash Dispensed → End 
+Explanation: 
+It shows how the system transitions from one state to another. 
+Steps: 
+1. Add Diagram → State Machine Diagram 
+2. Add: 
+o Initial state (black dot) 
+o States: 
+▪ Idle 
+▪ Card Inserted 
+▪ Authenticated 
+▪ Processing 
+3. Connect using Transition arrows 
+4. Label arrows: 
+o cardInserted 
+o pinEntered 
+COMPONENT DIAGRAM 
+Description: 
+A Component Diagram shows the organization of system components. 
+Components: 
+• ATM System 
+• Bank Server 
+• Database 
+• Card Reader 
+• Cash Dispenser 
+Explanation: 
+It represents the high-level architecture of the ATM system. 
+Steps: 
+1. Add Diagram → Component Diagram 
+2. Add components: 
+o ATM System 
+o Bank Server 
+o Database 
+3. Connect using Dependency arrows 
+DEPLOYMENT DIAGRAM 
+Description: 
+A Deployment Diagram shows the physical architecture. 
+Nodes: 
+• ATM Machine 
+• Bank Server 
+• Database Server 
+Explanation: 
+It shows how software components are deployed on hardware. 
+Steps: 
+1. Add Diagram → Deployment Diagram 
+2. Add Nodes: 
+o ATM Machine 
+o Bank Server 
+o Database Server 
+3. Place components inside nodes 
+4. Connect nodes using Communication Path 
+CONCLUSION 
+The UML modelling of the ATM system helps in understanding system structure, 
+behavior, and interactions. It provides a clear visualization of system design, improving 
+development and communication. 
+How to use this 
+• Write theory → draw diagrams side by side 
+• Even if diagrams are rough → you’ll still score high 
+• This answer alone = full marks if presentation is neat 
+BEFORE YOU START (important) 
+Always do this first: 
+• Open StarUML 
+• File → New → UML 2 Project 
+• Right-click Model → Add Diagram 
+LAB STRATEGY (this is what actually gets you marks) 
+Do in this order: 
+1. Use Case (easy start) 
+2. Class (important) 
+3. Sequence (must) 
+4. Activity (quick) 
+If time: 
+• Add State + Component 
+Common mistakes (avoid these) 
+Not naming arrows/messages 
+Messy diagram layout 
+Missing relationships in class diagram 
+No numbering in communication diagram 
+Final mindset 
+You don’t need creativity here. 
+Just remember: 
+• Actors → Use Cases 
+• Classes → Attributes + Methods 
+• Sequence → Flow of steps 
+• Activity → Flowchart 
+Repeat this once in lab → you’re done. 
+EXPERIMENT – 2 
+BUG REPORT ON ATM SYSTEM 
+AIM 
+To study the ATM system and identify different bugs in its operations. 
+SYSTEM SPECIFICATION 
+The ATM system allows users to perform banking operations such as: 
+• Withdraw cash  
+• Check balance  
+• Change PIN  
+• Print receipt  
+Actors: 
+• Customer  
+• Bank Server  
+Features to be Tested: 
+1. Card validation  
+2. PIN authentication  
+3. Withdraw transaction  
+4. Balance enquiry  
+5. Cash dispensing  
+6. PIN change  
+BUG IDENTIFICATION (LIST) 
+Bug ID Bug Name 
+ATM_001 Invalid Card 
+ATM_002 Invalid PIN 
+Bug ID Bug Name 
+ATM_003 Invalid Account Type 
+ATM_004 Insufficient Balance 
+ATM_005 Transaction Limit Exceed 
+ATM_006 Daily Limit Exceed 
+ATM_007 Invalid Amount Format 
+ATM_008 Receipt Not Printed 
+ATM_009 PIN Change Mismatch 
+DETAILED BUG REPORT 
+Bug ID: ATM_001 
+Bug Name: Invalid Card 
+Steps to Perform: 
+1. Insert a valid card into ATM  
+Expected Result: 
+Welcome screen should be displayed 
+Actual Result: 
+Invalid card message is displayed 
+Status: Pass / Fail 
+Bug ID: ATM_002 
+Bug Name: Invalid PIN 
+Steps: 
+1. Insert valid card  
+2. Enter correct PIN  
+Expected Result: 
+Menu screen should appear 
+Actual Result: 
+Invalid PIN message is shown 
+Status: Pass / Fail 
+ 
+              Bug ID: ATM_003 
+Bug Name: Invalid Account Type 
+Steps: 
+1. Enter PIN  
+2. Select Withdraw  
+3. Choose account type  
+Expected Result: 
+Amount entry screen 
+Actual Result: 
+Error message displayed 
+Status: Pass / Fail 
+ 
+              Bug ID: ATM_004 
+Bug Name: Insufficient Balance 
+Steps: 
+1. Select Withdraw  
+2. Enter amount more than balance  
+Expected Result: 
+Cash should be dispensed 
+Actual Result: 
+Insufficient balance message 
+Status: Pass / Fail 
+ 
+              Bug ID: ATM_005 
+Bug Name: Transaction Limit Exceeded 
+Steps: 
+1. Enter amount within limit  
+Expected Result: 
+Cash dispensed 
+Actual Result: 
+Transaction limit exceeded 
+Status: Pass / Fail 
+ 
+              Bug ID: ATM_006 
+Bug Name: Daily Limit Exceeded 
+Steps: 
+1. Withdraw amount greater than daily limit  
+Expected Result: 
+Cash dispensed 
+Actual Result: 
+Daily limit exceeded message 
+Status: Pass / Fail 
+ 
+              Bug ID: ATM_007 
+Bug Name: Invalid Amount (Denomination Issue) 
+Steps: 
+1. Enter amount not in multiples of 100  
+Expected Result: 
+Cash dispensed 
+Actual Result: 
+Error message shown 
+Status: Pass / Fail 
+ 
+              Bug ID: ATM_008 
+Bug Name: Receipt Not Printed 
+Steps: 
+1. Perform transaction  
+2. Request receipt  
+Expected Result: 
+Receipt should be printed 
+Actual Result: 
+No receipt printed 
+Status: Pass / Fail 
+ 
+              Bug ID: ATM_009 
+Bug Name: PIN Change Mismatch 
+Steps: 
+1. Select Change PIN  
+2. Enter new PIN and confirm  
+Expected Result: 
+PIN updated successfully 
+Actual Result: 
+PIN mismatch error 
+Status: Pass / Fail 
+ 
+  CONCLUSION 
+The ATM system may contain several bugs related to authentication, transaction limits, 
+and hardware operations. Identifying these bugs helps improve system performance, 
+security, and user experience. 
+ 
+       Why this version is better 
+     Clean headings 
+     Simple words 
+ 
+ 
+EXPERIMENT – 3 
+TEST CASES FOR BANKING APPLICATION 
+AIM 
+To design test cases for a banking application and verify its functionalities. 
+SYSTEM DESCRIPTION 
+A Banking Application allows users to: 
+• Login to account  
+• Check balance  
+• Transfer money  
+• Withdraw money  
+• Change password  
+TEST CASE FORMAT 
+Always write in table form: 
+Test Case ID      Test Scenario     Steps      Expected Result   Actual Result    Status 
+TEST CASES 
+1. Login Functionality 
+Test Case ID 
+Scenario 
+Steps 
+TC_001 
+Valid Login 
+Enter valid username and password 
+Expected Result User login successful 
+Actual Result 
+As per execution 
+Test Case ID TC_001 
+Status Pass/Fail 
+ 
+Test Case ID TC_002 
+Scenario Invalid Password 
+Steps Enter correct username and wrong password 
+Expected Result Error message displayed 
+Actual Result As per execution 
+Status Pass/Fail 
+ 
+   2. Balance Check 
+Test Case ID TC_003 
+Scenario Check Balance 
+Steps Login → Click balance enquiry 
+Expected Result Account balance displayed 
+Actual Result As per execution 
+Status Pass/Fail 
+ 
+           3. Fund Transfer 
+Test Case ID TC_004 
+Scenario Valid Transfer 
+Steps Enter valid account and amount 
+Expected Result Amount transferred successfully 
+Actual Result As per execution 
+Status Pass/Fail 
+Test Case ID 
+Scenario 
+Steps 
+TC_005 
+Insufficient Balance 
+Enter amount greater than balance 
+Expected Result Error message shown 
+Actual Result 
+Status 
+As per execution 
+Pass/Fail 
+4. Withdraw Money 
+Test Case ID 
+Scenario 
+Steps 
+TC_006 
+Valid Withdrawal 
+Enter valid amount 
+Expected Result Cash withdrawn successfully 
+Actual Result 
+Status 
+As per execution 
+Pass/Fail 
+Test Case ID 
+Scenario 
+Steps 
+TC_007 
+Exceed Limit 
+Enter amount above limit 
+Expected Result Limit exceeded message 
+Actual Result 
+Status 
+As per execution 
+Pass/Fail 
+5. Change Password 
+Test Case ID TC_008 
+Scenario Valid Password Change 
+Steps Enter old and new password 
+Expected Result Password updated successfully 
+Actual Result As per execution 
+Status Pass/Fail 
+ 
+Test Case ID TC_009 
+Scenario Password Mismatch 
+Steps Enter different new passwords 
+Expected Result Error message displayed 
+Actual Result As per execution 
+Status Pass/Fail 
+ 
+  CONCLUSION 
+Test cases help in verifying the correctness and reliability of a banking application. They 
+ensure that all functionalities work as expected and help identify errors. 
+ 
+       How to get full marks 
+     Write at least 8–10 test cases 
+     Use clear scenarios 
+     Keep steps simple 
+     Maintain neat table format 
+ 
+ 
+ 
+          EXPERIMENT – 5 
+Continuous Integration using Jenkins 
+AIM 
+To configure Jenkins and perform Continuous Integration by building and testing a 
+sample Java project. 
+THEORY 
+Continuous Integration (CI) 
+Continuous Integration is a software development practice where developers frequently 
+integrate code into a shared repository. Each integration is automatically built and 
+tested to detect errors early. 
+Jenkins 
+Jenkins is an open-source automation server used to implement CI/CD pipelines. It 
+automates tasks such as building, testing, and deploying applications. 
+Jenkins Management 
+Jenkins provides administrative features such as: 
+• Managing plugins  
+• Managing users  
+• Configuring system settings  
+Jenkins automates build and test processes forming a CI pipeline. 
+REQUIREMENTS 
+• Ubuntu Operating System  
+• Java (JDK 17)  
+• Git  
+• Jenkins  
+    PROCEDURE (STEP-BY-STEP) 
+ 
+  Step 1: Install Java 
+sudo apt install openjdk-17-jdk -y 
+     Why: Jenkins requires Java to run 
+ 
+  Step 2: Install Git 
+sudo apt install git -y 
+     Why: Used for version control and integration 
+ 
+  Step 3: Install Jenkins 
+(Jenkins installed using .deb package method) 
+wget https://pkg.jenkins.io/debian-stable/binary/jenkins_2.452.3_all.deb 
+sudo dpkg -i jenkins_2.452.3_all.deb 
+sudo apt -f install -y 
+     Why: Installs Jenkins automation server 
+ 
+  Step 4: Start Jenkins Service 
+sudo systemctl start jenkins 
+sudo systemctl enable jenkins 
+     Why: Starts Jenkins server 
+ 
+  Step 5: Open Jenkins Dashboard 
+Open browser: 
+http://localhost:8080 
+ 
+  Step 6: Unlock Jenkins 
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword 
+Paste password → Install suggested plugins (or continue if failed) 
+Step 7: Create Freestyle Job 
+• Go to Dashboard  
+• Click New Item  
+• Enter name: Exp5  
+• Select Freestyle Project  
+Step 8: Create Java Project in Workspace 
+cd /var/lib/jenkins/workspace/ 
+sudo mkdir Exp5 
+cd Exp5 
+//sudo mkdir -p src bin 
+Create Java file: 
+(Inside /var/lib/jenkins/workspace/Exp5) 
+sudo nano src/App.java 
+public class App { 
+public static void main(String[] args) { 
+System.out.println("Hello Jenkins CI without Maven and JUnit!"); 
+} 
+} 
+ctrl+o-> enter ->ctrl+x 
+✔ Test Program 
+sudo nano test/AppTest.java 
+public class AppTest { 
+public static void main(String[] args) { 
+        String expected = "Hello"; 
+        String actual = "Hello"; 
+ 
+        if (expected.equals(actual)) { 
+            System.out.println("Test Passed!"); 
+        } else { 
+            System.out.println("Test Failed!"); 
+        } 
+    } 
+} 
+     Why: Test file verifies correctness of program. 
+ 
+ 
+Set permissions: 
+sudo chown -R jenkins:jenkins /var/lib/jenkins/workspace/Exp5 
+     Why: Jenkins needs access to files 
+ 
+Step 9: Push Project to GitHub (IMPORTANT) 
+git init 
+git add . 
+git commit -m "Initial commit" 
+git remote add origin https://github.com/anu-cvr/Hello-World.git 
+git push -u origin main 
+     Why: Jenkins pulls code from Git repository. 
+ 
+  Step 11: Create Freestyle Job 
+• Dashboard → New Item  
+• Name: Exp5  
+• Select Freestyle Project  
+     Why: Defines automation job in Jenkins. 
+ 
+  Step 12: Configure Job 
+✔ Source Code Management 
+• Select Git  
+• Enter repository URL  
+Why: Connects Jenkins with project code. 
+✔ Build Trigger (Poll SCM) 
+H/5 * * * * 
+Why: Checks repository every 5 minutes. 
+✔ Build Step → Execute Shell 
+mkdir -p bin 
+javac -d bin src/App.java 
+javac -d bin -cp bin test/AppTest.java 
+java -cp bin App 
+java -cp bin AppTest 
+Why: 
+• Compile main code  
+• Compile test code  
+• Execute program  
+• Execute test  
+Step 13: Build Job 
+• Click Build Now  
+• View Console Output  
+OUTPUT 
+Hello Jenkins CI without Maven and JUnit! 
+Test Passed! 
+Finished: SUCCESS 
+Step 14: Manage Jenkins (Administration) 
+✔ View Jobs 
+• Dashboard → list of jobs  
+✔ Configure Jobs 
+• Modify Git URL or commands  
+✔ Plugins 
+• Git Plugin  
+• GitHub Plugin  
+• Pipeline Plugin  
+✔ Users 
+• Manage Jenkins → Manage Users  
+Why: Provides control and customization. 
+Step 15: Create Pipeline Job 
+• Dashboard → New Item → Pipeline  
+Pipeline Script 
+pipeline { 
+agent any 
+triggers { 
+pollSCM('H/5 * * * *') 
+cron('H 0 * * *') 
+} 
+stages { 
+        stage('Compile') { 
+            steps { 
+                sh 'javac -d bin src/App.java' 
+                sh 'javac -d bin -cp bin test/AppTest.java' 
+            } 
+        } 
+ 
+        stage('Run') { 
+            steps { 
+                sh 'java -cp bin App' 
+                sh 'java -cp bin AppTest' 
+            } 
+        } 
+    } 
+} 
+     Why: Automates build in structured pipeline stages. 
+ 
+  Step 16: Add Jenkinsfile 
+git add Jenkinsfile 
+git commit -m "Add Jenkinsfile" 
+git push origin main 
+     Why: Stores pipeline configuration in repository. 
+ 
+  Step 17: Run Pipeline 
+• Click Build Now  
+• Check console output  
+     Why: Executes automated CI pipeline. 
+ 
+  RESULT 
+Jenkins was successfully configured. Freestyle and pipeline jobs were created, and the 
+Java program and test cases were automatically built and executed. 
+ 
+    VIVA QUESTIONS 
+• What is CI? → Automatic build & test  
+• What is Jenkins? → Automation tool  
+• What is Poll SCM? → Checks repo changes  
+• What is Pipeline? → Structured CI workflow 
+The Jenkins job was successfully configured. The Java program was compiled and 
+executed automatically, demonstrating Continuous Integration. 
+ 
+    VIVA QUESTIONS 
+   What is Continuous Integration? 
+     Automatic building and testing of code when changes occur. 
+ 
+   What is Jenkins? 
+     Jenkins is an automation tool used for CI/CD. 
+ 
+   What is the purpose of build step? 
+     To compile and execute the program automatically. 
+ 
+   What does SUCCESS mean? 
+     The build executed without errors. 
+ 
+   Why Java is required? 
+     Jenkins runs on Java. 
+ 
+  FLOW TO REMEMBER 
+     
+Install → Start → Open → Create Job → Configure → Build → Output 
+ 
+FINAL LINE (write for extra marks) 
+“Jenkins automates the build and test process, forming a Continuous Integration 
+pipeline.” 
+FINAL STATUS 
+This answer = 
+✔ Matches your lab work 
+✔ Matches your file 
+✔ Covers theory + commands + execution 
+✔ Full marks ready 
+EXPERIMENT – 6 
+Scheduling Build Jobs using Jenkins 
+AIM 
+To schedule Jenkins build jobs using Poll SCM and Build periodically triggers. 
+THEORY 
+Scheduling in Jenkins: 
+Scheduling is the process of executing Jenkins jobs automatically without manual 
+intervention. Jenkins provides different triggers to run jobs based on time or code 
+changes. 
+Poll SCM: 
+Poll SCM is a build trigger in Jenkins that periodically checks the source code repository 
+for any changes. If changes are detected, Jenkins automatically triggers the build. 
+Build Periodically: 
+Build periodically is a trigger in Jenkins that executes the job automatically at specified 
+time intervals, regardless of any changes in the repository. 
+CRON Expression: 
+CRON expression is a time-based scheduling format used in Jenkins to define when a 
+job should run. 
+Example: 
+H/5 * * * * 
+This means the job runs every 5 minutes. 
+PROCEDURE (STEP-BY-STEP WITH PURPOSE) 
+Step 1: Create Build Job 
+1. Dashboard → New Item → Freestyle Project 
+2. Name: build 
+Configure: 
+• Source Code Management → Git 
+• Repo URL: 
+https://github.com/anu-cvr/Hello-World.git 
+Build Step: 
+mkdir -p bin 
+javac -d bin src/App.java 
+Why: 
+• Compiles Java source code 
+• Creates executable .class files 
+Step 2: Create Deploy Job 
+1. Dashboard → New Item → Freestyle Project 
+2. Name: deploy 
+Build Step: 
+echo "Deploying..." 
+mkdir -p /var/lib/jenkins/deploy/ 
+cp -r bin /var/lib/jenkins/deploy/ 
+Why: 
+• Simulates deployment 
+• Copies compiled files to deployment location 
+Step 3: Create Test Job 
+1. Dashboard → New Item → Freestyle Project 
+2. Name: test 
+Build Step: 
+mkdir -p bin 
+javac -d bin -cp bin test/AppTest.java 
+java -cp bin AppTest 
+Why: 
+• Compiles test code 
+• Executes test to validate output 
+Step 4: Create Release Job 
+1. Dashboard → New Item → Freestyle Project 
+2. Name: release 
+Build Step: 
+echo "Packaging release..." 
+tar -czf release.tar.gz bin/ 
+Why: 
+• Packages application into archive 
+• Prepares for distribution 
+Step 5: Chain Jobs (IMPORTANT) 
+✔ Build → Deploy 
+• Configure build job 
+• Post-build Actions → Build other projects 
+• Enter: deploy 
+• Tick: Trigger only if build is stable 
+Why: Automatically triggers deploy after successful build 
+✔ Deploy → Test 
+• Configure deploy job 
+• Post-build → Build other projects → test 
+Why: Runs testing after deployment 
+✔ Test → Release 
+• Configure release job 
+• Build after other projects → test 
+Why: Final step after successful testing 
+Step 6: Scheduling Jobs 
+✔ Case 1: Poll SCM 
+• Tick Poll SCM 
+• Enter: 
+H/5 * * * * 
+Why: 
+• Checks repo every 5 minutes 
+• Builds only when code changes 
+✔ Case 2: Build Periodically 
+• Tick Build periodically 
+• Enter: 
+H/2 * * * * 
+Why: 
+• Runs job every 2 minutes 
+• Independent of code changes 
+Step 7: Execute Job 
+• Click Build Now 
+• Check Console Output 
+EXECUTION FLOW 
+Build → Deploy → Test → Release 
+STEP PURPOSE SUMMARY 
+✔ Build Step 
+Compiles source code into executable form 
+✔ Deploy Step 
+Copies files to deployment directory 
+✔ Test Step 
+Validates application functionality 
+✔ Release Step 
+Packages application for distribution 
+✔ Post-Build Actions 
+Chains jobs automatically 
+✔ Build Triggers 
+Automates execution (time or code-based) 
+OUTPUT 
+Hello Jenkins CI without Maven and JUnit! 
+Test Passed! 
+Finished: SUCCESS 
+RESULT 
+Jenkins jobs were successfully created, chained, and scheduled using Poll SCM 
+and Build periodically triggers. 
+    VIVA QUESTIONS 
+   What is Poll SCM? 
+Checks repository changes and triggers build 
+ 
+   What is Build periodically? 
+Runs job at fixed time 
+ 
+   Difference? 
+Poll SCM → based on changes 
+Build periodically → based on time 
+ 
+   What is CRON? 
+Time format for scheduling 
+ 
+  FLOW TO REMEMBER 
+     
+Create Jobs → Chain → Add Triggers → Run → Output 
+ 
+       FINAL LINE 
+     “Jenkins scheduling automates job execution based on time and repository 
+changes.” 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+EXPERIMENT – 7 
+Version Control using Git 
+AIM 
+To study Git features, 3-tree architecture, and perform Git operations such as clone, 
+commit, and push. 
+THEORY 
+Git 
+Git is a distributed version control system used to track changes in source code and 
+manage project versions. 
+Features of Git 
+• Distributed system  
+• Fast and efficient  
+• Supports branching and merging  
+• Tracks history of changes  
+• Enables collaboration  
+3-Tree Architecture of Git 
+1. Working Directory 
+→ Contains actual files you modify  
+2. Staging Area (Index) 
+→ Stores files before committing  
+3. Repository (Local Repo) 
+→ Stores committed versions permanently  
+Flow: 
+Working Directory → Staging Area → Repository 
+PROCEDURE (AS PER YOUR FILE)  
+Step 1: Create GitHub Account 
+• Go to GitHub website  
+• Sign up and verify email  
+Step 2: Create Repository 
+• Click + → New repository  
+• Name: exp7  
+• Select Public/Private  
+• Click Create  
+Step 3: Generate Personal Access Token 
+• Go to Settings → Developer Settings  
+• Generate token  
+• Select repo permission  
+• Copy and save token  
+Why: GitHub uses token instead of password 
+Step 4: Install Git on Ubuntu 
+sudo apt update 
+sudo apt install git -y 
+Check: 
+git --version 
+Step 5: Configure Git 
+git config --global user.name "your-name" 
+git config --global user.email "your-email" 
+git config --global --list 
+Step 6: Create or Clone Repository 
+Option A: Initialize new repo 
+mkdir Exp-7 
+cd Exp-7 
+git init 
+Option B: Clone repo 
+git clone https://github.com/your-username/exp7.git 
+cd exp7 
+Step 7: Add and Commit Files 
+git status 
+git add . 
+git commit -m "Initial commit" 
+Why: Save changes to repository 
+Step 8: Connect to Remote Repository 
+git remote add origin https://github.com/your-username/exp7.git 
+git remote -v 
+git remote add origin https://github.com/your-username/exp7.git -connects local project with repote repository 
+git remote -v — What it does 
+It shows the remote repository links connected to your local Git project. 
+  Step 9: Push to GitHub 
+git branch -M main 
+git push -u origin main 
+     Enter: 
+• Username  
+• Personal Access Token  
+ 
+  Optional: Pull Changes 
+git pull origin main --allow-unrelated-histories --no-rebase 
+ 
+  RESULT 
+The Git repository was successfully created and operations such as add, commit, 
+clone, and push were performed. 
+ 
+    VIVA QUESTIONS 
+   What is Git? 
+     Version control system 
+ 
+   What is commit? 
+     Saving changes permanently 
+ 
+   What is clone? 
+     Copy repository from GitHub 
+ 
+   What is push? 
+     Upload local changes to GitHub 
+ 
+   Why Personal Access Token? 
+     GitHub doesn’t allow password login 
+ 
+  FLOW TO REMEMBER 
+     
+Create Repo → Git Init → Add → Commit → Push 
+ 
+       FINAL LINE (for extra marks) 
+     “Git tracks changes and enables version control using distributed architecture.” 
+ 
+  FINAL STATUS 
+     This answer: 
+• ✔ Matches your file exactly  
+• ✔ Includes theory + steps + commands  
+• ✔ Full scoring  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+          EXPERIMENT – 4 
+Study of JUnit Framework 
+ 
+  AIM 
+To study the JUnit framework and perform unit testing on sample Java programs. 
+THEORY 
+Unit Testing 
+Unit testing is the process of testing individual components (methods/functions) of a 
+program to ensure correctness. 
+JUnit 
+JUnit is an open-source testing framework for Java used to perform unit testing. It helps 
+verify whether the actual output matches the expected output. 
+Advantages of JUnit 
+• Automates testing  
+• Detects errors early  
+• Improves code reliability  
+• Easy to use with annotations  
+KEY CONCEPTS 
+✔ Test Case 
+A method used to test functionality. 
+✔ Annotations 
+• @Test → defines test method  
+✔ Assertions 
+• assertEquals() → checks equality  
+• assertTrue() → checks condition true  
+• assertFalse() → checks condition false  
+REQUIREMENTS 
+• Java (JDK)  
+• Eclipse IDE  
+• JUnit 4 Library  
+PROCEDURE 
+Step 1: Create Java Project 
+• Open Eclipse  
+• File → New → Java Project  
+• Name: Exp4  
+Step 2: Create Package 
+• Right-click project → New → Package  
+• Name: testpkg  
+Step 3: Add JUnit Library 
+• Right-click project → Build Path → Add Libraries  
+• Select JUnit → JUnit 4 → Finish  
+Step 4: Create Java Classes 
+Program 1: Even / Odd 
+package testpkg; 
+public class EvenOdd { 
+public boolean isEven(int num) { 
+return num % 2 == 0; 
+    } 
+} 
+ 
+  Program 2: String Length 
+package testpkg; 
+ 
+public class StringLength { 
+    public int getLength(String str) { 
+        return str.length(); 
+    } 
+} 
+ 
+  Program 3: Maximum of Two Numbers 
+package testpkg; 
+ 
+public class MaxNumber { 
+    public int max(int a, int b) { 
+        return Math.max(a, b); 
+    } 
+} 
+ 
+  Step 5: Create JUnit Test Classes 
+ 
+  EvenOddTest 
+package testpkg; 
+ 
+import static org.junit.Assert.*; 
+import org.junit.Test; 
+ 
+public class EvenOddTest { 
+ 
+    @Test 
+    public void testEven() { 
+        EvenOdd obj = new EvenOdd(); 
+        assertTrue(obj.isEven(10)); 
+    } 
+ 
+    @Test 
+    public void testOdd() { 
+        EvenOdd obj = new EvenOdd(); 
+        assertFalse(obj.isEven(7)); 
+    } 
+} 
+ 
+  StringLengthTest 
+package testpkg; 
+ 
+import static org.junit.Assert.*; 
+import org.junit.Test; 
+ 
+public class StringLengthTest { 
+ 
+    @Test 
+    public void testLength() { 
+        StringLength obj = new StringLength(); 
+        assertEquals(5, obj.getLength("Hello")); 
+    } 
+} 
+ 
+  MaxNumberTest 
+package testpkg; 
+ 
+import static org.junit.Assert.*; 
+import org.junit.Test; 
+ 
+public class MaxNumberTest { 
+ 
+    @Test 
+    public void testMax() { 
+        MaxNumber obj = new MaxNumber(); 
+        assertEquals(20, obj.max(10, 20)); 
+    } 
+} 
+ 
+  Step 6: Run Test Cases 
+• Right-click test class  
+• Click Run As → JUnit Test  
+ 
+      OUTPUT 
+• JUnit window displays:  
+o   Green bar → All tests passed  
+o Runs: 2, Errors: 0, Failures: 0  
+ 
+  RESULT 
+The test cases were successfully executed using the JUnit framework, and the expected 
+outputs were verified. 
+ 
+    VIVA QUESTIONS 
+   What is JUnit? 
+     A testing framework for Java 
+ 
+   What is @Test? 
+     Annotation used to define test methods 
+ 
+   What is assertion? 
+     It checks expected vs actual output 
+ 
+   What is unit testing? 
+     Testing individual components 
+ 
+   What does green bar indicate? 
+     All tests passed successfully 
+ 
+  FLOW TO REMEMBER 
+     
+Create Project → Add JUnit → Write Class → Write Test → Run → Green Bar 
+ 
+       FINAL LINE (write for extra marks) 
+     “JUnit automates unit testing and ensures correctness of program components.” 
+ 
+  FINAL STATUS 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+          EXPERIMENT –8 & 9 
+Maven POM, Lifecycle, Dependencies, Plugins & Repositories 
+ 
+  AIM 
+To study Maven POM (pom.xml), build lifecycle, repositories, dependencies, plugins, 
+and related concepts. 
+ 
+  THEORY 
+ 
+What is maven? 
+     Maven is a build automation tool used for Java projects. 
+     It automates tasks like compiling, testing, and packaging code. 
+     It also manages project dependencies using the pom.xml file. 
+   1. Maven POM (pom.xml) 
+     POM stands for Project Object Model 
+     It is the main configuration file in a Maven project. 
+It defines: 
+• Project metadata (GroupId, ArtifactId, Version) 
+• Dependencies (libraries required) 
+• Plugins 
+• Build configuration 
+ 
+   2. GroupId, ArtifactId, Version 
+• GroupId → Identifies organization/project namespace 
+     Example: com.example 
+• ArtifactId → Name of the project 
+     Example: myapp 
+• Version 
+o 1.0-SNAPSHOT → Development version 
+o 1.0 → Stable version 
+ 
+   3. Snapshot 
+     Snapshot is a development version 
+     It changes frequently during development 
+ 
+   4. Maven Dependencies 
+     Dependencies are external libraries required by the project. 
+Example: 
+<dependencies> 
+  <dependency> 
+    <groupId>org.junit.jupiter</groupId> 
+    <artifactId>junit-jupiter</artifactId> 
+    <version>5.9.3</version> 
+    <scope>test</scope> 
+  </dependency> 
+</dependencies> 
+     Used for testing purposes 
+ 
+   5. Maven Plugins 
+     Plugins extend Maven functionality. 
+Common plugins: 
+• Compiler Plugin → compiles Java code 
+• Surefire Plugin → runs test cases 
+ 
+Example: 
+<build> 
+  <plugins> 
+    <plugin> 
+      <groupId>org.apache.maven.plugins</groupId> 
+      <artifactId>maven-compiler-plugin</artifactId> 
+      <version>3.11.0</version> 
+      <configuration> 
+        <source>17</source> 
+        <target>17</target> 
+      </configuration> 
+    </plugin> 
+  </plugins> 
+</build> 
+ 
+   6. Maven Build Lifecycle 
+Maven consists of three lifecycles: 
+ 
+  1. Clean Lifecycle 
+mvn clean 
+     Deletes target/ directory 
+ 
+  2. Default Lifecycle 
+Phase Command Purpose 
+Validate mvn validate Check project 
+Compile mvn compile Compile code 
+Test mvn test Run tests 
+Package mvn package Create JAR 
+Install mvn install Store in local repo 
+ 
+  3. Site Lifecycle 
+mvn site 
+     Generates project documentation 
+ 
+   7. Maven Repositories 
+ 
+  Local Repository 
+     Stored on local system 
+   Location: 
+~/.m2/repository 
+     Stores downloaded dependencies 
+ 
+  Global (Central) Repository 
+     Online repository 
+     Example: 
+https://repo.maven.apache.org/maven2/ 
+     Contains libraries, frameworks, plugins 
+ 
+    PROCEDURE (EXECUTION PART) 
+ 
+Step 1: Update system 
+sudo apt update 
+ 
+  Step 2: Install Java (required) 
+Check: 
+java -version 
+If not installed: 
+sudo apt install openjdk-17-jdk -y 
+ 
+  Step 3: Install Maven 
+sudo apt install maven -y 
+ 
+  Step 4: Verify Maven 
+mvn -version 
+     Shows Maven + Java version   
+ 
+  Step 5: Create Maven Project 
+     Use single-line (safe): 
+mvn archetype:generate -DgroupId=sar -DartifactId=myapp -DinteractiveMode=false 
+ 
+  Step 6: Go to project folder 
+cd myapp 
+ 
+  Step 7: Compile project 
+mvn compile 
+ 
+  Step 8: Run tests 
+mvn test 
+ 
+  Step 9: Package project 
+mvn package 
+ 
+      OUTPUT 
+     You will see: 
+BUILD SUCCESS 
+     JAR file created: 
+target/myapp-1.0-SNAPSHOT.jar 
+ 
+  Step 1: Create Maven Project 
+mvn archetype:generate \ 
+ -DgroupId=sar \ 
+ -DartifactId=myapp \ 
+ -DinteractiveMode=false 
+Or 
+mvn archetype:generate -DgroupId=sar -DartifactId=myapp -DinteractiveMode=false 
+ 
+ 
+  RESULT 
+The Maven POM file, lifecycle, dependencies, plugins, and repositories were studied 
+successfully, and the project was built using Maven commands. 
+ 
+    VIVA QUESTIONS 
+   What is pom.xml? 
+     Configuration file of Maven project 
+ 
+   What is dependency? 
+     External library used in project 
+ 
+   What is plugin? 
+     Tool that extends Maven functionality 
+ 
+   What is lifecycle? 
+     Sequence of build phases 
+ 
+   What is .m2? 
+     Local repository 
+ 
+   What is snapshot? 
+     Development version 
+ 
+  MEMORY TRICK 
+     
+POM = config 
+Dependency = library 
+Plugin = tool 
+Lifecycle = steps 
+ 
+       FINAL LINE (for extra marks) 
+     “Maven uses pom.xml to manage build lifecycle, dependencies, and project 
+configuration.” 
+ 
+  FINAL STATUS 
+     This answer = 
+✔ Matches your file 
+✔ Covers theory + execution 
+✔ Full marks ready 
+ 
+ 
+RIMENT – 10 (FINAL NOTES) 
+Ansible Server Configuration & Infrastructure Management 
+ 
+  AIM 
+To configure Ansible server, manage infrastructure, and execute ad-hoc commands. 
+ 
+  DEFINITIONS (VERY IMPORTANT) 
+   Ansible 
+Ansible is an automation tool used for configuration management and deployment. 
+ 
+   Infrastructure Management 
+Managing servers and systems automatically instead of manual work. 
+ 
+   SSH in Ansible 
+Ansible uses SSH to connect to remote systems without installing any agent. 
+ 
+   YAML 
+YAML is a simple language used to write Ansible configurations. 
+     Format: 
+key: value 
+ 
+   Inventory 
+Inventory is a file that contains list of hosts (servers). 
+ 
+   Host Variables 
+Variables specific to a single host. 
+ 
+   Group Variables 
+Variables applied to a group of hosts. 
+ 
+   Ad-hoc Commands 
+Single-line commands used for quick tasks. 
+PROCEDURE (WRITE THIS) 
+Step 1: Install Ansible 
+sudo apt update 
+sudo apt install ansible -y 
+ansible --version 
+Step 2: Create Directory 
+mkdir ~/ansible 
+cd ~/ansible 
+Step 3: Create Inventory 
+nano hosts.ini 
+[webservers] 
+localhost ansible_connection=local 
+Step 4: Create Variables 
+mkdir -p host_vars group_vars 
+Host variable: 
+nano host_vars/localhost.yml 
+db_name: myapp 
+Group variable: 
+nano group_vars/webservers.yml 
+http_port: 80 
+Step 5: Run Ad-hoc Commands 
+Ping: 
+ansible -i hosts.ini all -m ping 
+ 
+Uptime: 
+ansible -i hosts.ini webservers -m shell -a "uptime" 
+ 
+      OUTPUT 
+• Ping → pong  
+• Uptime displayed  
+ 
+  RESULT 
+Ansible server was configured successfully and ad-hoc commands were executed. 
+ 
+    VIVA (SHORT ANSWERS) 
+• Ansible? → Automation tool  
+• Inventory? → List of hosts  
+• YAML? → Config language  
+• Ad-hoc? → One-line commands  
+• SSH? → Remote connection  
+ 
+  FLOW (REMEMBER THIS) 
+     
+Install → Inventory → Variables → Ping → Command 
+ 
+       FINAL LINE (write this) 
+     “Ansible automates system management using SSH and YAML-based 
+configurations.” 
+ 
+EXPERIMENT – 11 
+Ansible Playbooks, Variables, Loops, Handlers, Templates & Roles 
+AIM 
+To install Ansible and execute playbooks using variables, loops, conditionals, handlers, 
+templates, and roles. 
+REQUIREMENTS 
+• Ubuntu OS  
+• Internet connection  
+• Sudo privileges  
+THEORY (WRITE THIS) 
+Ansible 
+An automation tool used for configuration management and deployment. 
+Playbook 
+A YAML file used to automate tasks. 
+YAML 
+Human-readable configuration language. 
+Modules 
+Predefined functions (apt, copy, service). 
+Variables 
+Store reusable values. 
+Handlers 
+Triggered tasks (run when notified). 
+Loops 
+Repeat tasks multiple times. 
+Conditionals 
+Execute tasks based on conditions. 
+Templates 
+Dynamic configuration files. 
+Roles 
+Reusable structured components. 
+PROCEDURE (STEP-BY-STEP EXECUTION) 
+STEP 1: Install Ansible 
+sudo apt update 
+sudo apt install ansible -y 
+ansible --version 
+STEP 2: Create Project Directory 
+mkdir ~/ansible 
+cd ~/ansible 
+STEP 3: Create Inventory File 
+nano hosts.ini 
+[webservers] 
+localhost ansible_connection=local 
+STEP 4: Create Basic Playbook 
+nano local_playbook.yml --- - name: Install Apache on Local Machine 
+hosts: webservers 
+become: yes 
+  tasks: 
+    - name: Install Apache 
+      apt: 
+        name: apache2 
+        state: present 
+ 
+    - name: Start Apache 
+      service: 
+        name: apache2 
+        state: started 
+        enabled: yes 
+ 
+    - name: Create index.html 
+      copy: 
+        dest: /var/www/html/index.html 
+        content: "<h1>Hello from Apache!</h1>" 
+ 
+  STEP 5: Run Playbook 
+ansible-playbook -i hosts.ini local_playbook.yml --ask-become-pass 
+     Enter system password 
+ 
+  STEP 6: Verify Output 
+systemctl status apache2 
+Open browser: 
+http://localhost 
+     Output: Hello from Apache! 
+ 
+  STEP 7: Java Program Deployment 
+nano HelloWorld.java 
+public class HelloWorld { 
+    public static void main(String[] args) { 
+        System.out.println("Hello from Java!"); 
+    } 
+} 
+Compile & run: 
+javac HelloWorld.java 
+java HelloWorld 
+ 
+Display in browser: 
+java HelloWorld | sudo tee /var/www/html/java_output.html 
+Open: 
+http://localhost/java_output.html 
+ 
+  STEP 8: Advanced Playbook (Handlers + Variables) 
+Create file: 
+mkdir -p files 
+nano files/index.html 
+<h1>Hello from Ansible!</h1> 
+ 
+Create playbook: 
+nano site.yml - name: Configure web servers 
+  hosts: webservers 
+  become: yes 
+ 
+  vars: 
+    app_dir: /var/www/html 
+ 
+  tasks: 
+    - name: Install Apache 
+      apt: 
+        name: apache2 
+        state: present 
+ 
+    - name: Deploy index.html 
+      copy: 
+        src: index.html 
+        dest: "{{ app_dir }}/index.html" 
+      notify: Restart Apache 
+ 
+  handlers: 
+    - name: Restart Apache 
+      service: 
+        name: apache2 
+        state: restarted 
+ 
+Run: 
+ansible-playbook -i hosts.ini site.yml --ask-become-pass 
+ 
+  STEP 9: Loops - name: Install packages 
+  apt: 
+    name: "{{ item }}" 
+    state: present 
+  loop: 
+    - git 
+    - curl 
+ 
+  STEP 10: Conditionals 
+when: ansible_os_family == "Debian" 
+ 
+  STEP 11: Templates 
+mkdir templates 
+nano templates/config.j2 
+ServerName {{ inventory_hostname }} 
+ 
+  STEP 12: Roles 
+ansible-galaxy init webserver 
+ 
+      OUTPUT 
+• Apache installed and running  
+• Web page displayed in browser  
+• Java output displayed  
+• Playbook executed successfully  
+RESULT 
+The Ansible playbook was successfully executed, and tasks such as installation, 
+configuration, and deployment were automated using variables, loops, handlers, 
+templates, and roles. 
+VIVA QUESTIONS 
+• What is Ansible? → Automation tool  
+• What is playbook? → YAML automation file  
+• What is handler? → Triggered task  
+• What is loop? → Repetition  
+• What is template? → Dynamic file  
+• What is role? → Reusable structure  
+FLOW TO REMEMBER 
+Install → Inventory → Playbook → Run → Verify → Advanced Features 
+FINAL LINE (write this) 
+“Ansible playbooks automate system configuration using reusable and structured 
+components.” 
