@@ -1,0 +1,63 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+    printf("Enter the number of processes: ");
+    scanf("%d", &n);
+
+    int pid[n], at[n], bt[n], ft[n], tat[n], wt[n];
+    int isCompleted[n], currentTime = 0, completedProcesses = 0;
+    float avgTAT = 0, avgWT = 0;
+
+    // Input process details
+    for (int i = 0; i < n; i++) {
+        printf("Enter Arrival Time and Burst Time for Process %d: ", i);
+        scanf("%d %d", &at[i], &bt[i]);
+        pid[i] = i;
+        isCompleted[i] = 0;
+    }
+
+    // SJF Non-Preemptive Scheduling
+    while (completedProcesses < n) {
+        int minBurstTime = 9999;
+        int processIndex = -1;
+
+        for (int i = 0; i < n; i++) {
+            if (!isCompleted[i] && at[i] <= currentTime && bt[i] < minBurstTime) {
+                minBurstTime = bt[i];
+                processIndex = i;
+            }
+        }
+
+        if (processIndex != -1) {
+            currentTime += bt[processIndex];
+            ft[processIndex] = currentTime;
+            tat[processIndex] = ft[processIndex] - at[processIndex];
+            wt[processIndex] = tat[processIndex] - bt[processIndex];
+
+            avgTAT += tat[processIndex];
+            avgWT += wt[processIndex];
+
+            isCompleted[processIndex] = 1;
+            completedProcesses++;
+        } else {
+            currentTime++;
+        }
+    }
+
+    // Display the results
+    printf("\nProcess ID | Arrival | Burst | Finish | Turnaround | Waiting\n");
+    for (int i = 0; i < n; i++) {
+        printf("%9d | %7d | %5d | %6d | %10d | %7d\n",
+               pid[i], at[i], bt[i], ft[i], tat[i], wt[i]);
+    }
+
+    // Calculate and print averages
+    avgTAT /= n;
+    avgWT /= n;
+
+    printf("\nAverage Turnaround Time = %.2f", avgTAT);
+    printf("\nAverage Waiting Time    = %.2f\n", avgWT);
+
+    return 0;
+}

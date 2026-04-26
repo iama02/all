@@ -1,0 +1,42 @@
+b) Segmentation
+Program
+#include <stdio.h>
+struct Segment {
+    int base;
+    int limit;
+};
+int main() {
+    int numSegments, logicalAddress, segmentNumber, offset;
+    printf("Enter number of segments: ");
+    scanf("%d", &numSegments);
+    struct Segment segments[numSegments];
+    printf("Enter base and limit for each segment:\n");
+    for (int i = 0; i < numSegments; i++) {
+        printf("Segment %d - Base: ", i);
+        scanf("%d", &segments[i].base);
+        printf("Segment %d - Limit: ", i);
+        scanf("%d", &segments[i].limit);
+    }
+
+ printf("Enter logical address (Segment Number Offset): ");
+    scanf("%d %d", &segmentNumber, &offset);
+    if (segmentNumber >= numSegments || offset >= segments[segmentNumber].limit) {
+        printf("Error: Invalid logical address.\n");
+        return 1;
+    }
+    int physicalAddress = segments[segmentNumber].base + offset;
+    printf("Physical Address: %d\n", physicalAddress);
+    return 0;
+}
+Sample Input and Output
+•	Input: 
+•	Enter number of segments: 3
+•	Segment 0 - Base: 100
+•	Segment 0 - Limit: 50
+•	Segment 1 - Base: 200
+•	Segment 1 - Limit: 100
+•	Segment 2 - Base: 400
+•	Segment 2 - Limit: 150
+•	Enter logical address (Segment Number Offset): 1 75
+•	Output: 
+Physical Address: 275

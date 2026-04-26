@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<unistd.h>
+#include<stdlib.h>
+#include<sys/wait.h>
+
+int main() {
+    int pipefds[2];
+    int pid;
+    char writemessages[2][20] = {"Hi", "Hello"};
+    char readmessage[20];
+
+    if (pipe(pipefds) == -1) {
+        printf("Unable to create pipe\n");
+        return 1;
+    }
+
+    pid = fork();
+
+    if (pid == 0) { // Child
+        close(pipefds[1]);
+
+        read(pipefds[0], readmessage, sizeof(writemessages[0]));
+        printf("Child Process - Message 1: %s\n", readmessage);
+
+        read(pipefds[0], readmessage, sizeof(writemessages[1]));
+        printf("Child Process - Message 2: %s\n", readmessage);
+
+        close(pipefds[0]);
+    } else { // Parent
+        close(pipefds[0]);
+
+        write(pipefds[1], writemessages[0], sizeof(writemessages[0]));
+        write(pipefds[1], writemessages[1], sizeof(writemessages[1]));
+
+        close(pipefds[1]);
+        wait(NULL);
+    }
+
+    return 0;
+}

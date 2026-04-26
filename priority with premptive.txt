@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+int main() {
+    int n, t = 0, done = 0, i, idx;
+    float wt = 0, tat = 0;
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    int at[n], bt[n], pr[n], rt[n], ft[n], w[n], ta[n], comp[n];
+
+    for (i = 0; i < n; i++) {
+        printf("Enter AT BT Priority for P%d: ", i+1);
+        scanf("%d %d %d", &at[i], &bt[i], &pr[i]);
+        rt[i] = bt[i];
+        comp[i] = 0;
+    }
+
+    while (done < n) {
+        int min = 9999;
+        idx = -1;
+
+        for (i = 0; i < n; i++) {
+            if (at[i] <= t && !comp[i] && pr[i] < min && rt[i] > 0) {
+                min = pr[i];
+                idx = i;
+            }
+        }
+
+        if (idx == -1) t++;
+        else {
+            rt[idx]--; 
+            t++;
+
+            if (rt[idx] == 0) {
+                ft[idx] = t;
+                ta[idx] = ft[idx] - at[idx];
+                w[idx] = ta[idx] - bt[idx];
+                wt += w[idx];
+                tat += ta[idx];
+                comp[idx] = 1;
+                done++;
+            }
+        }
+    }
+
+    printf("\nPID AT BT P FT TAT WT\n");
+    for (i = 0; i < n; i++)
+        printf("P%d  %d  %d  %d  %d  %d  %d\n",
+               i+1, at[i], bt[i], pr[i], ft[i], ta[i], w[i]);
+
+    printf("\nAvg WT = %.2f", wt/n);
+    printf("\nAvg TAT = %.2f\n", tat/n);
+}

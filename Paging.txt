@@ -1,0 +1,33 @@
+Experiment 6: Memory Management Techniques (Paging and Segmentation)
+Objective
+To simulate memory management techniques, including Paging and Segmentation, using C programs.
+a) Paging
+Program
+#include <stdio.h>
+int main() {
+    int pageSize, numPages, logicalAddress, pageNumber, offset;
+    printf("Enter page size (in bytes): ");
+    scanf("%d", &pageSize);
+    printf("Enter number of pages: ");
+    scanf("%d", &numPages);
+    printf("Enter a logical address (in bytes): ");
+    scanf("%d", &logicalAddress);
+    if (logicalAddress >= pageSize * numPages) {
+        printf("Error: Logical address exceeds memory size.\n");
+        return 1;
+    }
+    pageNumber = logicalAddress / pageSize;
+    offset = logicalAddress % pageSize;
+    printf("Page Number: %d\n", pageNumber);
+    printf("Offset: %d\n", offset);
+    return 0;
+}
+Sample Input and Output
+•	Input: 
+•	Enter page size (in bytes): 256
+•	Enter number of pages: 16
+•	Enter a logical address (in bytes): 1000
+•	Output: 
+•	Page Number: 3
+•	Offset: 232
+

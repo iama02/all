@@ -1,0 +1,70 @@
+#include <stdio.h>
+
+struct Process {
+    int id;   // Process number (input order)
+    int at;   // Arrival Time
+    int bt;   // Burst Time
+    int ct;   // Completion Time
+    int tat;  // Turnaround Time
+    int wt;   // Waiting Time
+};
+
+int main() {
+    int n;
+    float totalTAT = 0, totalWT = 0;
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    struct Process p[n];
+
+    // Input
+    for (int i = 0; i < n; i++) {
+        p[i].id = i + 1;
+        printf("Enter Arrival Time and Burst Time for P%d: ", i + 1);
+        scanf("%d %d", &p[i].at, &p[i].bt);
+    }
+
+    // FCFS sorting (Arrival Time + tie by input order)
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (p[i].at > p[j].at ||
+               (p[i].at == p[j].at && p[i].id > p[j].id)) {
+
+                struct Process temp = p[i];
+                p[i] = p[j];
+                p[j] = temp;
+            }
+        }
+    }
+
+    int time = 0;
+
+    // Scheduling
+    for (int i = 0; i < n; i++) {
+        if (time < p[i].at)
+            time = p[i].at;
+
+        p[i].ct = time + p[i].bt;
+        p[i].tat = p[i].ct - p[i].at;
+        p[i].wt = p[i].tat - p[i].bt;
+
+        totalTAT += p[i].tat;
+        totalWT += p[i].wt;
+
+        time = p[i].ct;
+    }
+
+    // Output
+    printf("\nProcess  AT  BT  CT  TAT  WT\n");
+    for (int i = 0; i < n; i++) {
+        printf("P%d       %d   %d   %d   %d    %d\n",
+               p[i].id, p[i].at, p[i].bt,
+               p[i].ct, p[i].tat, p[i].wt);
+    }
+
+    printf("\nAverage Turnaround Time = %.2f", totalTAT / n);
+    printf("\nAverage Waiting Time    = %.2f\n", totalWT / n);
+
+    return 0;
+}

@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+#define FIFO_PATH "/tmp/my_fifo"
+
+int main() {
+    int pipe_fd;
+    char output_buffer[100];
+
+    // Open FIFO for reading
+    pipe_fd = open(FIFO_PATH, O_RDONLY);
+    read(pipe_fd, output_buffer, sizeof(output_buffer));
+    close(pipe_fd);
+
+    printf("Received message: %s", output_buffer);
+    return 0;
+}

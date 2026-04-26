@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <string.h>
+
+#define FIFO_PATH "/tmp/my_fifo"
+
+int main() {
+    int pipe_fd;
+    char input_buffer[100];
+
+    // Create FIFO if it does not exist
+    mkfifo(FIFO_PATH, 0666);
+
+    printf("Enter message to send: ");
+    fgets(input_buffer, sizeof(input_buffer), stdin);
+
+    // Open FIFO for writing
+    pipe_fd = open(FIFO_PATH, O_WRONLY);
+    write(pipe_fd, input_buffer, strlen(input_buffer) + 1);
+    close(pipe_fd);
+
+    printf("Message sent: %s", input_buffer);
+    return 0;
+}
